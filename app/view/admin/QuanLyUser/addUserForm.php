@@ -42,18 +42,16 @@
     <div class="container d-flex justify-content-center align-items-center vh-100 bg-gradient">
         <div class="card shadow p-4" style="width: 400px;">
             <h4 class="text-center mb-3">Thêm Người Dùng Mới</h4>
-            <form action="index.php?action=AddTinTuc" method="POST">
+          
+
+            <form action="index.php?action=addUser" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Họ và Tên</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
-                </div>
-                <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Thêm Người Dùng</button>
             </form>

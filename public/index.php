@@ -17,6 +17,5 @@ switch ($action) {
         break;
     default:
         $tintucController->getQuanlyTinTuc();
-        break;
 }
 ?>
