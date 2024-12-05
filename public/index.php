@@ -5,9 +5,9 @@
 
 
 //Tin tức
-// require_once __DIR__ . '/../app/model/dbConnect.php';
-// require_once __DIR__ . '/../app/model/DataTinTuc.php';
-// require_once __DIR__ . '/../app/controller/TinTucController.php';
+require_once __DIR__ . '/../app/model/dbConnect.php';
+require_once __DIR__ . '/../app/model/DataTinTuc.php';
+require_once __DIR__ . '/../app/controller/TinTucController.php';
 
 
 //User
@@ -20,8 +20,8 @@ $data = new Database();
 
 
 //Tin tức
-// $dataTinTuc_MD = new DataNews($data);
-// $tintucController = new TinTucController($dataTinTuc_MD);
+$dataTinTuc_MD = new DataNews($data);
+$tintucController = new TinTucController($dataTinTuc_MD);
 
 
 //User
