@@ -1,27 +1,21 @@
 <?php
 require_once __DIR__ . '/../app/model/dbConnect.php';
-require_once __DIR__ . '/../app/model/DataUser.php';
-require_once __DIR__ . '/../app/model/User.php';
-require_once __DIR__ . '/../app/controller/UserController.php';
-$database = new Database();
-$dataUser = new DataUser($database);
-//$dataUser->addUser(new User("An" , "123" , 0));
+require_once __DIR__.'/../app/model/DataTinTuc.php';
+require_once __DIR__.'/../app/controller/TinTucController.php';
+$data = new Database();
+$dataTinTuc_MD = new DataNews($data);
+$tintucController = new TinTucController($dataTinTuc_MD);
 
-$userController = new UserController($dataUser);
-
-
-
-$action = $_GET['action'] ?? 'getAllUserController';
+$action = $_GET['action'] ?? 'getAllTinTuccontroller';
 
 switch ($action) {
-    case 'getAllUsers':
-        $userController->getAllUserController();
+    case 'getAllTinTuc':
+        $tintucController->getQuanlyTinTuc();
         break;
-    case 'addUser':
-        $userController->addUserController();
+    case 'AddTinTuc':
+        $tintucController->addTinTuc();
         break;
     default:
-        $userController->getAllUserController();
-        break;
+        $tintucController->getQuanlyTinTuc();
 }
 ?>

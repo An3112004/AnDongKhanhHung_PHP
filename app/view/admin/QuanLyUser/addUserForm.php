@@ -42,6 +42,8 @@
     <div class="container d-flex justify-content-center align-items-center vh-100 bg-gradient">
         <div class="card shadow p-4" style="width: 400px;">
             <h4 class="text-center mb-3">Thêm Người Dùng Mới</h4>
+          
+
             <form action="index.php?action=addUser" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Họ và Tên</label>

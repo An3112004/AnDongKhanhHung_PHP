@@ -58,7 +58,7 @@
         <h2 class="form-title">Thêm Tin Tức</h2>
 
         <!-- Form Thêm Tin Tức -->
-        <form action="process_add_news.php" method="POST" enctype="multipart/form-data">
+        <form action="index.php?action=AddTinTuc" method="POST" enctype="multipart/form-data">
             <div class="mb-3 form-group">
                 <label for="news_name" class="form-label">Tên Tin Tức</label>
                 <input type="text" class="form-control" id="news_name" name="news_name" placeholder="Nhập tên tin tức" required>
@@ -72,11 +72,6 @@
             <div class="mb-3 form-group">
                 <label for="content" class="form-label">Nội Dung Tin Tức</label>
                 <textarea class="form-control" id="content" name="content" placeholder="Nhập nội dung tin tức" rows="6" required></textarea>
-            </div>
-
-            <div class="mb-3 form-group">
-                <label for="date" class="form-label">Ngày Đăng</label>
-                <input type="date" class="form-control" id="date" name="date" required>
             </div>
 
             <div class="mb-3 form-group">
