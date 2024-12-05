@@ -47,5 +47,43 @@ class UserController
 
 
     // lấy dữ liệu từ form editUserForm sửa trong csdl
+    public function editUserController()
+    {
+        require_once __DIR__ . '/../view/admin/QuanLyUser/editUserForm.php';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $password = $_POST['password'];
+            // Kiểm tra xem user có tồn tại chưa (optional)
+            $existingUser = $this->DataUserModel->getUserByName($name);
+            if ($existingUser) {
+                $error = "Người dùng đã tồn tại!";
+                echo $error;
+                require_once __DIR__ . '/../view/admin/QuanLyUser/addUserForm.php';
+                return;
+            }
+
+            // Thêm người dùng vào cơ sở dữ liệu
+            $this->DataUserModel->updateUser(new User($name, $password, 0) , $id);
+            $success = "Thêm người dùng thành công!";
+            echo $success;
+            header("Location: index.php?action=getAllUsers");
+            exit();
+        }
+    }
+
     // lấy dữ liệu từ form removeUserForm xóa trong csdl
+    public function removeUserController()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'] ?? null; // Lấy chỉ số cần xóa nếu có
+            if ($id !== null && is_numeric($id)) {
+                // Xóa phần tử khỏi danh sách
+                $this->DataUserModel->deleteUser($id);
+                }
+                header('Location: index.php?action=getAllTinTuc');
+            exit();
+        }
+    }
 }

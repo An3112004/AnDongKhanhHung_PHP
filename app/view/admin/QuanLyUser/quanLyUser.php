@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -167,12 +166,12 @@
                     <td><?= htmlspecialchars($value['password']) ?></td>
                     <td>
                         <!-- Nút Sửa -->
-                        <a href="" class="btn btn-edit">
+                        <a href="index.php?action=editUser&id=<?= $value['id'] ?>&name=<?= urlencode($value['username']) ?>&password=<?= urlencode($value['password']) ?>" class="btn btn-edit">
                             <i class="fa-solid fa-pen-to-square"></i> Sửa
                         </a>
 
                         <!-- Nút Xóa -->
-                        <form action="" method="POST" style="display: inline-block;">
+                        <form action="index.php?action=removeUser" method="POST" style="display: inline-block;">
                             <input type="hidden" name="id" value="<?= $value['id'] ?>">
                             <button type="submit" class="btn btn-delete">
                                 <i class="fa-solid fa-trash"></i> Xóa

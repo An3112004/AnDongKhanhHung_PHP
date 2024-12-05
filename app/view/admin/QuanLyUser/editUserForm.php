@@ -1,4 +1,9 @@
-
+<?php
+// Lấy dữ liệu từ URL (GET request)
+$id = $_GET['id'] ?? '';
+$name = $_GET['name'] ?? '';
+$pass = $_GET['password'] ?? '';
+?>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -44,21 +49,16 @@
     <div class="container d-flex justify-content-center align-items-center vh-100 bg-gradient">
         <div class="card shadow p-4" style="width: 400px;">
             <h4 class="text-center mb-3">Sửa Người Dùng</h4>
-            <form action="edit_user_handler.php" method="POST">
-                <!-- Giả sử bạn có ID người dùng để chỉnh sửa -->
-                <input type="hidden" name="user_id" value="<!-- ID người dùng từ cơ sở dữ liệu -->">
+            <form action="index.php?action=editUser" method="POST">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
                 
                 <div class="mb-3">
                     <label for="name" class="form-label">Họ và Tên</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<!-- Tên người dùng -->" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<!-- Email người dùng -->" required>
+                    <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu mới (để trống nếu không thay đổi)">
+                    <input type="text" class="form-control" id="password" name="password" value="<?= htmlspecialchars($pass)?>">
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Cập nhật Người Dùng</button>
             </form>
