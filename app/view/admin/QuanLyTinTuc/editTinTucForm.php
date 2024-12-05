@@ -1,3 +1,13 @@
+<?php
+// Lấy dữ liệu từ URL (GET request)
+$index = $_GET['id'] ?? '';
+$name = $_GET['name'] ?? '';
+$title = $_GET['title'] ?? '';
+$content = $_GET['content'] ?? '';
+$image = $_GET['image'] ?? '';
+$category_id = $_GET['category_id'] ?? '';
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -58,37 +68,30 @@
         <h2 class="form-title">Sửa Tin Tức</h2>
 
         <!-- Form Sửa Tin Tức -->
-        <form action="process_edit_news.php" method="POST" enctype="multipart/form-data">
-            <!-- Giả sử bạn đã có một ID cho tin tức -->
-            <input type="hidden" name="news_id" value="ID_CỦA_TIN_TỨC">
-
-            <div class="mb-3 form-group">
+        <form action="index.php?action=editTinTuc" method="POST" enctype="multipart/form-data">
+        <input type="text" id="editIndex" name="edit_index" value="<?= htmlspecialchars($index) ?>">
+        <input type="text" id="editIndex" name="category_id" value="<?= htmlspecialchars($category_id) ?>">
+        <div class="mb-3 form-group">
                 <label for="news_name" class="form-label">Tên Tin Tức</label>
-                <input type="text" class="form-control" id="news_name" name="news_name" placeholder="Nhập tên tin tức" value="Tên tin tức cũ" required>
+                <input type="text" class="form-control" id="news_name" name="news_name"  value="<?= htmlspecialchars($name) ?>" required>
             </div>
 
             <div class="mb-3 form-group">
                 <label for="title" class="form-label">Tiêu Đề Tin Tức</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề tin tức" value="Tiêu đề cũ" required>
+                <input type="text" class="form-control" id="title" name="title"  value="<?= htmlspecialchars($title) ?>"required>
             </div>
 
             <div class="mb-3 form-group">
                 <label for="content" class="form-label">Nội Dung Tin Tức</label>
-                <textarea class="form-control" id="content" name="content" placeholder="Nhập nội dung tin tức" rows="6" required> Nội dung tin tức cũ</textarea>
-            </div>
-
-            <div class="mb-3 form-group">
-                <label for="date" class="form-label">Ngày Đăng</label>
-                <input type="date" class="form-control" id="date" name="date" value="2024-12-01" required>
+                <textarea class="form-control" id="content" name="content"  rows="6" required> <?= htmlspecialchars($content) ?></textarea>
             </div>
 
             <div class="mb-3 form-group">
                 <label for="image" class="form-label">Hình Ảnh Tin Tức</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                <small class="form-text text-muted">Chỉ tải lên nếu bạn muốn thay đổi hình ảnh.</small>
+                <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
             </div>
-
-            <button type="submit" class="btn btn-primary">Cập Nhật Tin Tức</button>
+            <input type="text" name="old_image" value="<?= htmlspecialchars($image) ?>"> <!-- Lưu ảnh cũ để xử lý khi không thay đổi ảnh -->
+            <button type="submit" class="btn btn-primary">Lưu Tin Tức</button>
         </form>
     </div>
 
