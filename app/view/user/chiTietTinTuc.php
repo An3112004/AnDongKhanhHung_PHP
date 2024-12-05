@@ -50,7 +50,7 @@ $row = $result->fetch_assoc();
         <div class="news-content">
             <p><?php echo $row['content']; ?></p>
         </div>
-        <a href="../public/index.php" class="btn btn-primary mt-3">Quay lại danh sách tin tức</a>
+        <a href="../../../public/index.php" class="btn btn-primary mt-3">Quay lại danh sách tin tức</a>
     </div>
 </div>
 
