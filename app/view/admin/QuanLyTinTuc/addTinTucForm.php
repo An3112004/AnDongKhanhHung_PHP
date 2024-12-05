@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Sản Phẩm</title>
+    <title>Thêm Tin Tức</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -55,31 +55,31 @@
 <body>
 
     <div class="container">
-        <h2 class="form-title">Thêm Sản Phẩm</h2>
+        <h2 class="form-title">Thêm Tin Tức</h2>
 
-        <!-- Form Thêm Sản Phẩm -->
-        <form action="process_add_product.php" method="POST" enctype="multipart/form-data">
+        <!-- Form Thêm Tin Tức -->
+        <form action="index.php?action=AddTinTuc" method="POST" enctype="multipart/form-data">
             <div class="mb-3 form-group">
-                <label for="name" class="form-label">Tên Sản Phẩm</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên sản phẩm" required>
+                <label for="news_name" class="form-label">Tên Tin Tức</label>
+                <input type="text" class="form-control" id="news_name" name="news_name" placeholder="Nhập tên tin tức" required>
             </div>
 
             <div class="mb-3 form-group">
-                <label for="description" class="form-label">Mô Tả Sản Phẩm</label>
-                <textarea class="form-control" id="description" name="description" placeholder="Nhập mô tả sản phẩm" rows="4" required></textarea>
+                <label for="title" class="form-label">Tiêu Đề Tin Tức</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề tin tức" required>
             </div>
 
             <div class="mb-3 form-group">
-                <label for="price" class="form-label">Giá</label>
-                <input type="number" class="form-control" id="price" name="price" placeholder="Nhập giá sản phẩm (VNĐ)" required>
+                <label for="content" class="form-label">Nội Dung Tin Tức</label>
+                <textarea class="form-control" id="content" name="content" placeholder="Nhập nội dung tin tức" rows="6" required></textarea>
             </div>
 
             <div class="mb-3 form-group">
-                <label for="image" class="form-label">Hình Ảnh Sản Phẩm</label>
+                <label for="image" class="form-label">Hình Ảnh Tin Tức</label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Lưu Sản Phẩm</button>
+            <button type="submit" class="btn btn-primary">Lưu Tin Tức</button>
         </form>
     </div>
 

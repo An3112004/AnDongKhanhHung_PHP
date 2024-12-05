@@ -42,7 +42,7 @@
     <div class="container d-flex justify-content-center align-items-center vh-100 bg-gradient">
         <div class="card shadow p-4" style="width: 400px;">
             <h4 class="text-center mb-3">Thêm Người Dùng Mới</h4>
-            <form action="add_user_handler.php" method="POST">
+            <form action="index.php?action=AddTinTuc" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Họ và Tên</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
