@@ -76,7 +76,7 @@
 
             <div class="mb-3 form-group">
                 <label for="image" class="form-label">Hình Ảnh Tin Tức</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu Tin Tức</button>

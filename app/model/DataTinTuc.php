@@ -19,34 +19,57 @@ class DataNews
     // Lấy dữ liệu tất cả tin tức
     public function getAllNews()
     {
-        $sql = "select news.id,name,title,content,image from news 
-                inner join categories on categories.id = news.id";
+        $sql = "select news.id,name,title,content,image , news.category_id from news
+                inner join categories on categories.id = news.category_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Thêm tin tức
-    public function addNews($title, $content, $image)
+    public function addNews($name , $title, $content, $image)
     {
-        $sql = "INSERT INTO news (title, content, image, created_at, category_id) VALUES (:title, :content, :image, NOW(), :categoryId)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':image', $image);
-        return $stmt->execute();
+        try {
+            // Lấy ID của danh mục
+            $categoryID = $this->getCategoryIDByName($name);
+            if (!$categoryID) {
+                echo "Danh mục không tồn tại!";
+                return;
+            }
+    
+            // Lấy ngày giờ hiện tại
+            $createdAt = date('Y-m-d H:i:s');
+    
+            // Chuẩn bị câu lệnh SQL để thêm tin tức
+            $query = "INSERT INTO news (title, content, image, created_at, category_id) 
+                      VALUES (:title, :content, :image, :created_at, :category_id)";
+            $stmt = $this->conn->prepare($query);
+    
+            // Gán giá trị tham số
+            $stmt->bindValue(':title', $title);
+            $stmt->bindValue(':content', $content);
+            $stmt->bindValue(':image', $image);
+            $stmt->bindValue(':created_at', $createdAt);
+            $stmt->bindValue(':category_id', $categoryID);
+    
+            // Thực thi câu lệnh
+            $stmt->execute();
+    
+            echo "Thêm tin tức thành công!";
+        } catch (PDOException $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
     }
 
     // Sửa tin tức
-    public function updateNews($id, $title, $content, $image, $categoryId)
+    public function editNews($id, $title, $content, $image)
     {
-        $sql = "UPDATE news SET title = :title, content = :content, image = :image, category_id = :categoryId WHERE id = :id";
+        $sql = "UPDATE news SET title = :title, content = :content, image = :image WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':image', $image);
-        $stmt->bindParam(':categoryId', $categoryId);
+        $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
 
@@ -55,10 +78,13 @@ class DataNews
     {
         $sql = "DELETE FROM news WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindValue(':id', $id);
         return $stmt->execute();
     }
 
+
+
+    
     // Tìm kiếm tin tức
     public function searchNews($keyword)
     {
@@ -78,4 +104,19 @@ class DataNews
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về kết quả dưới dạng mảng kết hợp
     }
+
+    public function getCategoryIDByName($categoryName) {
+        try {
+            $query = "SELECT id FROM categories WHERE name = :name LIMIT 1";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':name', $categoryName);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ? $result['id'] : null; // Trả về ID nếu tồn tại, nếu không trả về null
+        } catch (PDOException $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return null;
+        }
+    }
+    
 }
