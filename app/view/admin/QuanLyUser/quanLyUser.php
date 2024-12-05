@@ -74,7 +74,7 @@
             margin-bottom: 20px;
         }
 
-        <style>
+        /* <> */
 
         /* Nút Sửa */
         .btn-edit {
@@ -135,7 +135,7 @@
             margin: 0 5px;
             /* Khoảng cách giữa các nút */
         }
-    </style>
+    
 
     </style>
 </head>

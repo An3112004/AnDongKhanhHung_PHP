@@ -53,6 +53,7 @@ class DataUser
             $stmt->bindValue(':password', $user->getPassword());
             $stmt->bindValue(':role', $user->getRole());
             $stmt->execute();
+            echo "Thêm thành công";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
