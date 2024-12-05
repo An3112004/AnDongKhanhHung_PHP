@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý sản phẩm</title>
-    <!-- Include Bootstrap CSS -->
+    <title>Quản lý tin tức</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-
-    <!-- Custom styles for the page -->
     <style>
         body {
             background-color: #f8f9fa;
@@ -36,7 +33,7 @@
         .modal-footer {
             background-color: #f1f1f1;
         }
-        #add-product {
+        #add-news {
             margin-top: 20px;
         }
         .form-label {
@@ -51,179 +48,162 @@
 <body>
 
 <div class="container">
-    <h1>Quản lý sản phẩm</h1>
-    
-    <!-- Search Bar -->
+    <h1>Quản lý tin tức</h1>
     <div class="mb-3">
-        <input type="text" id="search" class="form-control" placeholder="Tìm kiếm sản phẩm..." oninput="searchProduct()">
+        <input type="text" id="search" class="form-control" placeholder="Tìm kiếm tin tức..." oninput="searchNews()">
     </div>
 
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Tên sản phẩm</th>
-                <th>Mô tả</th>
-                <th>Giá</th>
-                <th>Hình ảnh</th>
+                <th>Tên tin tức</th>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+                <th>Ảnh</th>
+                <th>Ngày tạo</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
-        <tbody id="product-list">
-            <!-- Dynamic product rows will be injected here -->
+        <tbody id="news-list">
+            <!-- Dynamic news rows will be injected here -->
         </tbody>
     </table>
     
-    <!-- Button to add product -->
-    <button id="add-product" class="btn btn-primary">Thêm sản phẩm</button>
+    <button id="add-news" class="btn btn-primary">Thêm tin tức</button>
 </div>
 
-<!-- Modal for adding/editing products -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+<!-- Modal for adding/editing news -->
+<div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="productModalLabel">Thêm sản phẩm mới</h5>
+                <h5 class="modal-title" id="newsModalLabel">Thêm tin tức mới</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="productForm">
+                <form id="newsForm">
                     <div class="mb-3">
-                        <label for="ten" class="form-label">Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="ten" required>
+                        <label for="newsName" class="form-label">Tên tin tức</label>
+                        <input type="text" class="form-control" id="newsName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Mô tả sản phẩm</label>
-                        <textarea class="form-control" id="description" rows="3" required></textarea>
+                        <label for="newsTitle" class="form-label">Tiêu đề</label>
+                        <input type="text" class="form-control" id="newsTitle" required>
                     </div>
                     <div class="mb-3">
-                        <label for="price" class="form-label">Giá</label>
-                        <input type="text" class="form-control" id="price" required>
+                        <label for="newsContent" class="form-label">Nội dung</label>
+                        <textarea class="form-control" id="newsContent" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Hình ảnh</label>
-                        <input type="file" class="form-control" id="image">
+                        <label for="newsImage" class="form-label">Ảnh</label>
+                        <input type="file" class="form-control" id="newsImage">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" id="saveProduct">Lưu</button>
+                <button type="button" class="btn btn-primary" id="saveNews">Lưu</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Include Bootstrap JS and custom script -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-// Sample product data
-const products = [
-    { id: 1, name: "Sản phẩm 1", description: "Mô tả sản phẩm 1", price: "100.000 VND", image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Sản phẩm 2", description: "Mô tả sản phẩm 2", price: "200.000 VND", image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Sản phẩm 3", description: "Mô tả sản phẩm 3", price: "150.000 VND", image: "https://via.placeholder.com/150" },
+const news = [
+    { id: 1, name: "Tin tức 1", title: "Tiêu đề 1", content: "Nội dung chi tiết 1", image: "https://via.placeholder.com/150", date: "2024-12-01" },
+    { id: 2, name: "Tin tức 2", title: "Tiêu đề 2", content: "Nội dung chi tiết 2", image: "https://via.placeholder.com/150", date: "2024-12-02" }
 ];
 
-// Function to render product list
-function renderProductList() {
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = ''; // Clear any existing rows
-
-    products.forEach(product => {
+function renderNewsList() {
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = '';
+    news.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>${product.price}</td>
-            <td><img src="${product.image}" alt="Product Image" width="50px"></td>
+            <td>${item.name}</td>
+            <td>${item.title}</td>
+            <td>${item.content}</td>
+            <td><img src="${item.image}" alt="News Image" width="50"></td>
+            <td>${item.date}</td>
             <td>
-                <button class="btn btn-warning btn-sm" onclick="editProduct(${product.id})">Sửa</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">Xoá</button>
+                <button class="btn btn-warning btn-sm" onclick="editNews(${item.id})">Sửa</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteNews(${item.id})">Xoá</button>
             </td>
         `;
-        productList.appendChild(row);
+        newsList.appendChild(row);
     });
 }
 
-// Function to add product
-function addProduct() {
-    const newProduct = {
-        id: products.length + 1,
-        name: document.getElementById('ten').value,
-        description: document.getElementById('description').value,
-        price: document.getElementById('price').value,
-        image: document.getElementById('image').files[0] ? URL.createObjectURL(document.getElementById('image').files[0]) : "https://via.placeholder.com/150"
+function addNews() {
+    const newNews = {
+        id: news.length + 1,
+        name: document.getElementById('newsName').value,
+        title: document.getElementById('newsTitle').value,
+        content: document.getElementById('newsContent').value,
+        image: document.getElementById('newsImage').files[0] ? URL.createObjectURL(document.getElementById('newsImage').files[0]) : "https://via.placeholder.com/150",
+        date: new Date().toISOString().split('T')[0]
     };
-    products.push(newProduct);
-    renderProductList();
-    $('#productModal').modal('hide');
+    news.push(newNews);
+    renderNewsList();
+    $('#newsModal').modal('hide');
 }
 
-// Function to edit product
-function editProduct(id) {
-    const product = products.find(p => p.id === id);
-    document.getElementById('ten').value = product.name;
-    document.getElementById('description').value = product.description;
-    document.getElementById('price').value = product.price;
-    document.getElementById('image').value = ''; // Reset the image input
-
-    document.getElementById('saveProduct').onclick = () => saveEditedProduct(id);
-    $('#productModal').modal('show');
+function editNews(id) {
+    const item = news.find(n => n.id === id);
+    document.getElementById('newsName').value = item.name;
+    document.getElementById('newsTitle').value = item.title;
+    document.getElementById('newsContent').value = item.content;
+    document.getElementById('newsImage').value = '';
+    document.getElementById('saveNews').onclick = () => saveEditedNews(id);
+    $('#newsModal').modal('show');
 }
 
-// Function to save edited product
-function saveEditedProduct(id) {
-    const product = products.find(p => p.id === id);
-    product.name = document.getElementById('ten').value;
-    product.description = document.getElementById('description').value;
-    product.price = document.getElementById('price').value;
-    product.image = document.getElementById('image').files[0] ? URL.createObjectURL(document.getElementById('image').files[0]) : product.image;
-    
-    renderProductList();
-    $('#productModal').modal('hide');
+function saveEditedNews(id) {
+    const item = news.find(n => n.id === id);
+    item.name = document.getElementById('newsName').value;
+    item.title = document.getElementById('newsTitle').value;
+    item.content = document.getElementById('newsContent').value;
+    item.image = document.getElementById('newsImage').files[0] ? URL.createObjectURL(document.getElementById('newsImage').files[0]) : item.image;
+    renderNewsList();
+    $('#newsModal').modal('hide');
 }
 
-// Function to delete product
-function deleteProduct(id) {
-    const productIndex = products.findIndex(p => p.id === id);
-    if (productIndex !== -1) {
-        products.splice(productIndex, 1);
-        renderProductList();
-    }
+function deleteNews(id) {
+    const index = news.findIndex(n => n.id === id);
+    if (index !== -1) news.splice(index, 1);
+    renderNewsList();
 }
 
-// Function to search products
-function searchProduct() {
+function searchNews() {
     const query = document.getElementById('search').value.toLowerCase();
-    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query));
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = '';  // Clear any existing rows
-
-    filteredProducts.forEach(product => {
+    const filteredNews = news.filter(n => n.name.toLowerCase().includes(query));
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = '';
+    filteredNews.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>${product.price}</td>
-            <td><img src="${product.image}" alt="Product Image" width="50px"></td>
+            <td>${item.name}</td>
+            <td>${item.title}</td>
+            <td>${item.content}</td>
+            <td><img src="${item.image}" alt="News Image" width="50"></td>
+            <td>${item.date}</td>
             <td>
-                <button class="btn btn-warning btn-sm" onclick="editProduct(${product.id})">Sửa</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">Xoá</button>
+                <button class="btn btn-warning btn-sm" onclick="editNews(${item.id})">Sửa</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteNews(${item.id})">Xoá</button>
             </td>
         `;
-        productList.appendChild(row);
+        newsList.appendChild(row);
     });
 }
 
-// Initialize the product list
-renderProductList();
-
-// Add new product event
-document.getElementById('add-product').onclick = () => {
-    document.getElementById('productForm').reset();
-    document.getElementById('saveProduct').onclick = addProduct;
-    $('#productModal').modal('show');
+document.getElementById('add-news').onclick = () => {
+    document.getElementById('newsForm').reset();
+    document.getElementById('saveNews').onclick = addNews;
+    $('#newsModal').modal('show');
 };
+
+renderNewsList();
 </script>
 
 </body>
