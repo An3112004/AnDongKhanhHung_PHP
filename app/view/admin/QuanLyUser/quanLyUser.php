@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -73,6 +74,70 @@
         .btn-add {
             margin-bottom: 20px;
         }
+
+        <style>
+
+        /* Nút Sửa */
+        .btn-edit {
+            background-color: #28a745;
+            /* Màu xanh lá */
+            color: white;
+            /* Chữ màu trắng */
+            border: none;
+            /* Không viền */
+            padding: 5px 10px;
+            /* Khoảng cách bên trong */
+            border-radius: 5px;
+            /* Bo góc */
+            cursor: pointer;
+            /* Con trỏ chuột khi hover */
+            transition: background-color 0.3s ease;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .btn-edit:hover {
+            background-color: #218838;
+            /* Màu xanh đậm hơn khi hover */
+        }
+
+        /* Nút Xóa */
+        .btn-delete {
+            background-color: #dc3545;
+            /* Màu đỏ */
+            color: white;
+            /* Chữ màu trắng */
+            border: none;
+            /* Không viền */
+            padding: 5px 10px;
+            /* Khoảng cách bên trong */
+            border-radius: 5px;
+            /* Bo góc */
+            cursor: pointer;
+            /* Con trỏ chuột khi hover */
+            transition: background-color 0.3s ease;
+            /* Hiệu ứng chuyển đổi màu */
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            /* Màu đỏ đậm hơn khi hover */
+        }
+
+        /* Hiển thị biểu tượng sửa và xóa */
+        .fa-pen-to-square,
+        .fa-trash {
+            margin-right: 5px;
+            /* Khoảng cách giữa biểu tượng và chữ */
+        }
+
+        /* Căn chỉnh nút */
+        .table td .btn-edit,
+        .table td .btn-delete {
+            margin: 0 5px;
+            /* Khoảng cách giữa các nút */
+        }
+    </style>
+
     </style>
 </head>
 
@@ -82,40 +147,41 @@
         <h2 class="form-title">Quản Lý Người Dùng</h2>
 
         <!-- Nút thêm người dùng -->
-        <a href="add_user.php" class="btn btn-success btn-add">Thêm Người Dùng</a>
+        <a href="index.php?action=addUser" class="btn btn-success btn-add">Thêm Người Dùng</a>
 
         <!-- Danh sách người dùng -->
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Họ và Tên</th>
-                    <th>Email</th>
-                    <th>Hành Động</th>
+                    <th>Name</th>
+                    <th>password</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Vòng lặp hiển thị danh sách người dùng -->
-                <tr>
-                    <td>1</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>nguyenvana@gmail.com</td>
+            <?php
+
+            foreach ($listUser as $index => $value):
+            ?>
+                <tr data-index="<?= $value['id'] ?>">
+                    <td><?= htmlspecialchars($value['username']) ?></td>
+                    <td><?= htmlspecialchars($value['password']) ?></td>
                     <td>
-                        <a href="edit_user.php?id=1" class="btn btn-edit">Sửa</a>
-                        <a href="delete_user.php?id=1" class="btn btn-delete">Xóa</a>
+                        <!-- Nút Sửa -->
+                        <a href="" class="btn btn-edit">
+                            <i class="fa-solid fa-pen-to-square"></i> Sửa
+                        </a>
+
+                        <!-- Nút Xóa -->
+                        <form action="" method="POST" style="display: inline-block;">
+                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                            <button type="submit" class="btn btn-delete">
+                                <i class="fa-solid fa-trash"></i> Xóa
+                            </button>
+                        </form>
                     </td>
+
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Trần Thị B</td>
-                    <td>tranthib@gmail.com</td>
-                    <td>
-                        <a href="edit_user.php?id=2" class="btn btn-edit">Sửa</a>
-                        <a href="delete_user.php?id=2" class="btn btn-delete">Xóa</a>
-                    </td>
-                </tr>
-                <!-- Tiếp tục các người dùng khác -->
-            </tbody>
+            <?php endforeach; ?>
         </table>
     </div>
 
