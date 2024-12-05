@@ -1,7 +1,7 @@
 <?php
     class Database {
         private $host = "localhost";
-        private $database_name = "qlysanpham";
+        private $database_name = "tintuc";
         private $username = "root";
         private $password = "";
         public $conn;

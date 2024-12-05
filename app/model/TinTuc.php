@@ -1,58 +1,70 @@
 <?php
-class SanPham{
-    //Đồng
+class News {
     private $id;
-    private $name_prodoct;
-    private $price_product;
-    private $desc_product;
+    private $title;
+    private $content;
     private $image;
+    private $createdAt;
+    private $categoryId;
 
-    //phuong thuc khoi tao 
-    public function __construct($id,$name_prodoct,$price_product,$desc_product,$image)
-    {
+    // Constructor
+    public function __construct($id = null, $title = null, $content = null, $image = null, $createdAt = null, $categoryId = null) {
         $this->id = $id;
-        $this->name_prodoct = $name_prodoct;
-        $this->price_product = $name_prodoct;
-        $this->desc_product = $desc_product;
+        $this->title = $title;
+        $this->content = $content;
         $this->image = $image;
+        $this->createdAt = $createdAt;
+        $this->categoryId = $categoryId;
     }
-     // Getter và Setter cho id
-     public function getId() {
+
+    // Getters
+    public function getId() {
         return $this->id;
     }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getContent() {
+        return $this->content;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function getCategoryId() {
+        return $this->categoryId;
+    }
+
+    // Setters
     public function setId($id) {
         $this->id = $id;
     }
 
-    // Getter và Setter cho name_product
-    public function getNameProduct() {
-        return $this->name_prodoct;
-    }
-    public function setNameProduct($name_product) {
-        $this->name_prodoct = $name_product;
+    public function setTitle($title) {
+        $this->title = $title;
     }
 
-    // Getter và Setter cho price_product
-    public function getPriceProduct() {
-        return $this->price_product;
-    }
-    public function setPriceProduct($price_product) {
-        $this->price_product = $price_product;
+    public function setContent($content) {
+        $this->content = $content;
     }
 
-    // Getter và Setter cho desc_product
-    public function getDescProduct() {
-        return $this->desc_product;
-    }
-    public function setDescProduct($desc_product) {
-        $this->desc_product = $desc_product;
-    }
-
-    // Getter và Setter cho image
-    public function getImage() {
-        return $this->image;
-    }
     public function setImage($image) {
         $this->image = $image;
     }
+
+    public function setCreatedAt($createdAt) {
+        $this->createdAt = $createdAt;
+    }
+
+    public function setCategoryId($categoryId) {
+        $this->categoryId = $categoryId;
+    }
 }
+?>
