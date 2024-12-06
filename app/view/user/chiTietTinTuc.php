@@ -115,7 +115,7 @@ $image = $_GET['image'] ?? '';
                 <p><?= htmlspecialchars($content) ?></p>
                 <img src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($name) ?>" class="flower-image">
             </div>
-
+            <a href="index.php?action=getDanhSachTinTuc" class="btn btn-danger">Quay Lại</a>
         </div>
     </div>
 </body>
