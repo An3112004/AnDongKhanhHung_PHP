@@ -41,18 +41,30 @@ $result = $conn->query($sql);
 
 <div class="container">
     <h1 class="mb-4">Quản Lý Tin Tức</h1>
-    <div id="news-list" class="row">
-        <?php while($row = $result->fetch_assoc()) { ?>
-        <div class="col-md-4">
-            <a href="../public/chiTietTinTuc.php?id=<?php echo $row['id']; ?>" class="news-card">
-                <img src="https://via.placeholder.com/150" alt="<?php echo $row['title']; ?>">
-                <h5><?php echo $row['title']; ?></h5>
-                <p class="news-date">Ngày tạo: <?php echo $row['created_at']; ?></p>
-                <p><?php echo substr($row['content'], 0, 100); ?>...</p>
-            </a>
-        </div>
-        <?php } ?>
-    </div>
+    <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên tin tức</th>
+                    <th>Tiêu đề</th>
+                    <th>Nội dung</th>
+                    <th>Ảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic news rows will be injected here -->
+                <?php
+
+                foreach ($newList as $index => $value):
+                ?>
+                    <tr data-index="<?= $value['id'] ?>">
+                        <td><?= htmlspecialchars($value['name']) ?></td>
+                        <td><?= htmlspecialchars($value['title']) ?></td>
+                        <td><?= htmlspecialchars($value['content']) ?></td>
+                        <td><img src="<?= htmlspecialchars($value['image']) ?>" alt="<?= htmlspecialchars($value['image']) ?>" class="flower-image">
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
 </div>
 
 </body>

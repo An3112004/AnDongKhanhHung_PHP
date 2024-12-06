@@ -178,4 +178,7 @@ class TinTucController
     }
     // Hàm hỗ trợ upload ảnh
 
+
+    //hien thi len danh sach tin tuc
+
 }
