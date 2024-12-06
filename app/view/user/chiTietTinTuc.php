@@ -115,6 +115,7 @@ $image = $_GET['image'] ?? '';
                 <p><?= htmlspecialchars($content) ?></p>
                 <img src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($name) ?>" class="flower-image">
             </div>
+
         </div>
     </div>
 </body>
