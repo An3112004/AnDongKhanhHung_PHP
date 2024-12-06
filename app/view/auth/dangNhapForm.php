@@ -51,7 +51,7 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100 bg-gradient">
         <div class="card shadow p-4" style="width: 350px;">
-            <h4 class="text-center mb-3">Đăng Ký</h4>
+            <h4 class="text-center mb-3">Đăng Nhập</h4>
 
             <!-- Hiển thị thông báo lỗi -->
             <?php if (!empty($error)): ?>

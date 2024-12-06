@@ -112,6 +112,7 @@
                 </div>
                 </a>
             <?php endforeach; ?>
+            <a href="index.php?action=getDangXuat" class="btn btn-danger">Đăng xuất</a>
         </div>
     </div>
 </body>
