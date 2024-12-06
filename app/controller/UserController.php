@@ -40,7 +40,7 @@ class UserController
             $this->DataUserModel->addUser(new User($name, $password, 0));
             $success = "Thêm người dùng thành công!";
             echo $success;
-            header("Location: index.php?action=getAllUsers");
+            header("Location: index.php?action=getAllUser");
             exit();
         }
     }
@@ -63,12 +63,11 @@ class UserController
                 require_once __DIR__ . '/../view/admin/QuanLyUser/addUserForm.php';
                 return;
             }
-
             // Thêm người dùng vào cơ sở dữ liệu
             $this->DataUserModel->updateUser(new User($name, $password, 0) , $id);
             $success = "Thêm người dùng thành công!";
             echo $success;
-            header("Location: index.php?action=getAllUsers");
+            header("Location: index.php?action=getAllUser");
             exit();
         }
     }
@@ -82,7 +81,7 @@ class UserController
                 // Xóa phần tử khỏi danh sách
                 $this->DataUserModel->deleteUser($id);
                 }
-                header('Location: index.php?action=getAllTinTuc');
+                header('Location: index.php?action=getAllUser');
             exit();
         }
     }

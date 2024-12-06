@@ -176,6 +176,5 @@ class TinTucController
         $newsList = $this->dataNews->getAllNews();
         require '../view/user/danhSachTinTuc.php';
     }
-    // Hàm hỗ trợ upload ảnh
 
 }
