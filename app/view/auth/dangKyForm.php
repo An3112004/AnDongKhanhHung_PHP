@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,36 +37,50 @@
             color: #0056b3;
             text-decoration: underline;
         }
+
+        .alert-danger {
+            font-weight: bold;
+            font-size: 14px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
     </style>
 </head>
+
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100 bg-gradient">
         <div class="card shadow p-4" style="width: 350px;">
-            <div class="text-center">
-                <img src="https://via.placeholder.com/80" alt="Avatar" class="rounded-circle mb-3">
-            </div>
             <h4 class="text-center mb-3">Đăng Ký</h4>
-            <p class="text-center text-muted mb-4">Tạo tài khoản để quản lý các thiết bị của bạn</p>
-            <form>
+
+            <!-- Hiển thị thông báo lỗi -->
+            <?php if (!empty($error)): ?>
+                <div class="alert alert-danger text-center" role="alert">
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="index.php?action=getDangKy" method="POST">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="email" name="name" placeholder="Name">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu của bạn">
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
                 <div class="mb-3">
                     <label for="confirm-password" class="form-label">Xác nhận mật khẩu</label>
-                    <input type="password" class="form-control" id="confirm-password" placeholder="Xác nhận mật khẩu của bạn">
+                    <input type="text" class="form-control" id="confirm-password" name="confirm_password" placeholder="Confirm password">
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Đăng Ký</button>
             </form>
-            <p class="text-center mt-4">Đã có tài khoản? <a href="#" class="text-decoration-none">Đăng Nhập</a></p>
+            <p class="text-center mt-4">Đã có tài khoản? <a href="index.php?action=getDangNhap" class="text-decoration-none">Đăng Nhập</a></p>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

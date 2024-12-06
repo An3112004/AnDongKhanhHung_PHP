@@ -182,6 +182,7 @@
                 </tr>
             <?php endforeach; ?>
         </table>
+        <a href="index.php?action=getAdminHome" class="btn btn-danger">Quay Lại</a>
     </div>
 
     <!-- Bootstrap JS -->

@@ -1,61 +1,58 @@
 <?php
-//Lưu ý : muốn chạy User thì comment hết phần code của TinTuc , bỏ comment User
-//        muốn chạy TinTuc thì comment hết phần code của User , bỏ comment TinTuc
-// Phần chung luôn bật
-
+require_once __DIR__ . '/../app/controller/LoginController.php';
 
 //Tin tức
-// require_once __DIR__ . '/../app/model/dbConnect.php';
-// require_once __DIR__ . '/../app/model/DataTinTuc.php';
-// require_once __DIR__ . '/../app/controller/TinTucController.php';
-
+require_once __DIR__ . '/../app/model/dbConnect.php';
+require_once __DIR__ . '/../app/model/DataTinTuc.php';
+require_once __DIR__ . '/../app/model/DataCaTegory.php';
+require_once __DIR__ . '/../app/controller/TinTucController.php';
 
 //User
 require_once __DIR__ . '/../app/model/dbConnect.php';
 require_once __DIR__ . '/../app/model/DataUser.php';
 require_once __DIR__ . '/../app/controller/UserController.php';
+require_once __DIR__ . '/../app/controller/adminController.php';
 
 //Chung
 $data = new Database();
 
-
-//Tin tức
-// $dataTinTuc_MD = new DataNews($data);
-// $tintucController = new TinTucController($dataTinTuc_MD);
-
+$dataNews = new DataNews($data);
+$dataCategory = new DataCaTefory($data);
+$tintucController = new TinTucController($dataNews, $dataCategory);
 
 //User
 $DataUserModel = new DataUser($data);
+$login = new LoginController($DataUserModel);
 $UserController = new UserController($DataUserModel);
-
-
+$AdminController = new AdminController();
 
 //Chung
-$action = $_GET['action'] ?? 'Khong';
+$action = $_GET['action'] ?? 'login';
 
 
-//Tin tức
-// switch ($action) {
-//     case 'getAllTinTuc':
-//         $tintucController->getQuanlyTinTuc();
-//         break;
-//     case 'AddTinTuc':
-//         $tintucController->addTinTuc();
-//         break;
-//     case 'editTinTuc':
-//         $tintucController->editTinTuc();
-//         break;
-//     case 'removeTinTuc':
-//         $tintucController->deleteTinTuc();
-//         break;
-//     default:
-//         $tintucController->getQuanlyTinTuc();
-// }
-
-
-
-//User
 switch ($action) {
+    case 'getDangNhap':
+        //Trang dang nhap
+        $login->DangNhap();
+        break;
+    case 'getDangXuat':
+        $login->DangXuat();
+        break;
+    case 'getDangKy':
+        $login->DangKy();
+        break;
+    case 'getAllTinTuc':
+        $tintucController->getQuanlyTinTuc();
+        break;
+    case 'AddTinTuc':
+        $tintucController->addTinTuc();
+        break;
+    case 'editTinTuc':
+        $tintucController->editTinTuc();
+        break;
+    case 'removeTinTuc':
+        $tintucController->deleteTinTuc();
+        break;
     case 'getAllUser':
         $UserController->getAllUserController();
         break;
@@ -68,6 +65,17 @@ switch ($action) {
     case 'removeUser':
         $UserController->removeUserController();
         break;
+
+    case 'getAdminHome':
+        $AdminController->getAdminHome();
+        break;
+
+    case 'getDanhSachTinTuc':
+        $tintucController->getDanhSachTinTuc();
+        break;
+
     default:
-        $UserController->getAllUserController();
+        //Trang dang nhap
+        $login->DangNhap();
+        break;
 }
