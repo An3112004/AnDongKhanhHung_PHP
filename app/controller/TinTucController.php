@@ -174,13 +174,12 @@ class TinTucController
     // Lấy danh sách tin tức cho người dùng
     public function getDanhSachTinTuc()
     {
-        $newsList = $this->dataNews->getAllNews();
-        session_start();
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 0) {
-            header("Location: index.php?action=getDangNhap");
-            exit("Bạn không có quyền truy cập!");
-        }
-
+        $newList = $this->dataNews->getAllNews();
         require_once __DIR__ . '/../view/user/danhSachTinTuc.php';
+    }
+
+    public function getChiTietTinTuc()
+    {
+        require_once __DIR__ . '/../view/user/chiTietTinTuc.php';
     }
 }
