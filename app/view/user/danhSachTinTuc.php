@@ -53,6 +53,7 @@ $result = $conn->query($sql);
         </div>
         <?php } ?>
     </div>
+    <a href="index.php?action=getDangXuat"><button>Đăng Xuất</button></a>
 </div>
 
 </body>

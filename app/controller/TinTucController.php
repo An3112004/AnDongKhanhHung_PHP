@@ -13,10 +13,10 @@ class TinTucController
     // lấy dữ liệu từ Datatintuc đổ ra view user danhSachtintuc
     private $dataNews;
     private $dataCategory;
-    public function __construct()
+    public function __construct(DataNews $dataNews, DataCaTefory $dataCaTefory)
     {
-        $this->dataNews = new DataNews();
-        $this->dataCategory = new DataCaTefory();
+        $this->dataNews = $dataNews;
+        $this->dataCategory = $dataCaTefory;
     }
     //lay danh sach tin tucs cho view quan ly tin tuc
     public function getQuanlyTinTuc()
@@ -24,6 +24,7 @@ class TinTucController
         $newList = $this->dataNews->getAllNews();
         require __DIR__ . '/../view/admin/QuanLyTinTuc/quanLyTinTuc.php';
     }
+    
     //them tin tuc tu form theem tin tuc
     public function addTinTuc()
     {
@@ -133,8 +134,8 @@ class TinTucController
                 } else {
                     echo "loi";
                 }
-                $this->dataCategory->editCategory($category_id , $name);
-                $this->dataNews->editNews($editIndex , $title, $content, $image );
+                $this->dataCategory->editCategory($category_id, $name);
+                $this->dataNews->editNews($editIndex, $title, $content, $image);
                 header('Location: index.php?action=getAllTinTuc');
                 exit();
             }
@@ -153,8 +154,8 @@ class TinTucController
                 // Xóa phần tử khỏi danh sách
                 $this->dataNews->deleteNews($idNews);
                 $this->dataCategory->deleteCategory($idCategory);
-                }
-                header('Location: index.php?action=getAllTinTuc');
+            }
+            header('Location: index.php?action=getAllTinTuc');
             exit();
         }
     }
@@ -174,7 +175,12 @@ class TinTucController
     public function getDanhSachTinTuc()
     {
         $newsList = $this->dataNews->getAllNews();
-        require '../view/user/danhSachTinTuc.php';
-    }
+        session_start();
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 0) {
+            header("Location: index.php?action=getDangNhap");
+            exit("Bạn không có quyền truy cập!");
+        }
 
+        require_once __DIR__ . '/../view/user/danhSachTinTuc.php';
+    }
 }
