@@ -73,7 +73,9 @@ switch ($action) {
     case 'getDanhSachTinTuc':
         $tintucController->getDanhSachTinTuc();
         break;
-
+    case 'getChiTietTinTuc':
+        $tintucController->getChiTietTinTuc();
+        break;
     default:
         //Trang dang nhap
         $login->DangNhap();
