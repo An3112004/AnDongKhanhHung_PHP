@@ -39,6 +39,16 @@ class DataUser
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getUserNamePass($name , $password)
+    {
+        $sql = "SELECT * FROM users WHERE username = :name AND password = :password";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     // Thêm user mới
     public function addUser(User $user)

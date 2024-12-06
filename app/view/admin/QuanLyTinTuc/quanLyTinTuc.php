@@ -74,9 +74,7 @@
 
     <div class="container">
         <h1>Quản lý tin tức</h1>
-        <div class="mb-3">
-            <input type="text" id="search" class="form-control" placeholder="Tìm kiếm tin tức..." oninput="searchNews()">
-        </div>
+        <a href="index.php?action=AddTinTuc"><button id="add-news" class="btn btn-primary">Thêm tin tức</button></a>
 
         <table class="table table-striped table-bordered">
             <thead>
@@ -119,8 +117,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <a href="index.php?action=AddTinTuc"><button id="add-news" class="btn btn-primary">Thêm tin tức</button></a>
+        <a href="index.php?action=getAdminHome" class="btn btn-danger">Quay Lại</a>
     </div>
 
 
